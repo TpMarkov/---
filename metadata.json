@@ -1,0 +1,8 @@
+{
+  "name": "Atlanta Furniture",
+  "description": "Premium e-commerce landing page and digital catalogue showcase for modern elegant furniture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

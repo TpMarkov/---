@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Jura", "Poppins", system-ui, -apple-system, sans-serif;
+  --font-jura: "Jura", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+
+  --color-primary: #E85B5B;
+  --color-accent: #E85B5B;
+  --color-secondary: #6C757D;
+  --color-brand-gray: #848484;
+  --color-dark: #333333;
+  --color-link: #FF5151;
+  --color-warm-bg: #FCFCFC;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-dark);
+}
+
+/* Custom scrollbars and styling in context of fluid layout */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #E85B5B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c74b4b;
+}
