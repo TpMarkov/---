@@ -112,7 +112,7 @@ export default function CatalogueFlipBook({ lang, onProductClick }: CatalogueFli
                   </div>
 
                   <div className="mt-4 pt-4 border-t border-neutral-200/60 flex items-center justify-between text-[11px] font-mono text-neutral-400">
-                    <span>ATLANTA CATALOGUE</span>
+                    <span>LILOVI CATALOGUE</span>
                     <span>© 2024–2025</span>
                   </div>
 

@@ -9,6 +9,7 @@ import QuoteRequestSection from "./components/QuoteRequestSection";
 import Footer from "./components/Footer";
 import CookieConsent from "./components/CookieConsent";
 import { Product, CartItem } from "./types";
+import LiloviLogo from "./components/LiloviLogo";
 
 export default function App() {
   const [lang, setLang] = React.useState<"BG" | "EN">("EN");
@@ -102,20 +103,15 @@ export default function App() {
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="flex flex-col items-center gap-6 text-center"
+              className="flex flex-col items-center gap-4 text-center"
             >
-              <img
-                src="https://atlanta.bg/storage/settings/April2026/NJRfJAwfUwMazRhQmkpD.png"
-                alt="Atlanta Preloader Logo"
-                className="w-24 h-auto object-contain filter drop-shadow-sm mb-2"
-                referrerPolicy="no-referrer"
-              />
+              <LiloviLogo className="h-14 md:h-16 w-auto filter drop-shadow-sm mb-1" />
               <div className="space-y-1">
-                <span className="block font-jura text-[15px] font-black tracking-[0.3em] text-[#E85B5B] uppercase">
-                  ATLANTA
+                <span className="block font-jura text-lg font-black tracking-[0.25em] text-[#E85B5B] uppercase">
+                  LILOVI
                 </span>
-                <span className="block font-jura text-[10px] text-zinc-400 tracking-wider uppercase font-bold">
-                  Bespoke Furnishings & Digital FlipBook
+                <span className="block font-jura text-[10px] text-zinc-500 tracking-wider uppercase font-bold">
+                  Bespoke Wooden Elegance & Digital Showcase
                 </span>
               </div>
               

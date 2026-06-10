@@ -2,6 +2,7 @@ import React from "react";
 import { ShoppingBag, Globe, Menu, X, Trash2, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { CartItem } from "../types";
+import LiloviLogo from "./LiloviLogo";
 
 interface NavbarProps {
   lang: "BG" | "EN";
@@ -79,24 +80,21 @@ export default function Navbar({
           {/* Logo & Brand Identity */}
           <div className="flex items-center gap-12">
             <a
-              href="https://atlanta.bg"
-              target="_blank"
-              rel="noreferrer"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
               className="flex items-center gap-3 group"
               id="brand-logo-link"
             >
-              <img
-                src="https://atlanta.bg/storage/settings/April2026/NJRfJAwfUwMazRhQmkpD.png"
-                alt="Atlanta Furniture"
-                className="h-9 w-auto object-contain filter hover:brightness-110 transition-all"
-                referrerPolicy="no-referrer"
-              />
+              <LiloviLogo className="h-10 md:h-11 w-auto filter hover:brightness-105 transition-all" />
               <div className="hidden md:flex flex-col border-l border-neutral-200 pl-3 leading-none">
-                <span className="font-jura text-[13px] tracking-[0.2em] font-bold text-dark uppercase">
-                  ATLANTA
+                <span className="font-jura text-[14px] tracking-[0.2em] font-black text-dark uppercase">
+                  LILOVI
                 </span>
-                <span className="font-jura text-[9px] text-brand-gray tracking-wider uppercase font-medium mt-0.5">
-                  {tr.brandDesc}
+                <span className="font-sans text-[9px] text-brand-gray tracking-wider uppercase font-semibold mt-0.5">
+                  {lang === "BG" ? "Луксозен Мебелен Бранд" : "Luxury Wooden Elegance"}
                 </span>
               </div>
             </a>
@@ -215,7 +213,7 @@ export default function Navbar({
               <div>
                 <div className="flex items-center justify-between border-b border-neutral-100 pb-5">
                   <span className="font-jura text-[14px] tracking-widest font-extrabold text-dark uppercase">
-                    ATLANTA
+                    LILOVI
                   </span>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
@@ -259,7 +257,7 @@ export default function Navbar({
                   {tr.cta}
                 </button>
                 <p className="text-center font-jura text-[10px] text-brand-gray tracking-widest uppercase mt-4">
-                  Atlanta Luxury Furnishings 2026
+                  Lilovi Luxury Furnishings 2026
                 </p>
               </div>
             </motion.div>

@@ -50,7 +50,7 @@ export default function QuoteRequestSection({
       successDesc: "Благодарим ви! Спецификацията и запитването са изпратени на нашия проектантски отдел.",
       regNum: "Референтен номер на оферта:",
       followUp: "Служител ще се свърже с Вас в следващите 2 работни часа за финализиране на детайлите.",
-      brandNote: "АТЛАНТА МЕБЕЛИ • ДИГИТАЛНА ИНТЕГРАЦИЯ",
+      brandNote: "ЛИЛОВИ МЕБЕЛИ • ДИГИТАЛНА ИНТЕГРАЦИЯ",
     },
     EN: {
       title: "Corporate & Bespoke Quote Builder",
@@ -72,7 +72,7 @@ export default function QuoteRequestSection({
       successDesc: "Verification complete. Your specifications have been forwarded to our pricing coordinates.",
       regNum: "Registry Quote Code:",
       followUp: "A dedicated design consultant will contact you via your chosen channel within 2 hours.",
-      brandNote: "ATLANTA ARCHITECTURAL • SMART SYSTEM",
+      brandNote: "LILOVI ARCHITECTURAL • SMART SYSTEM",
     },
   }[lang];
 

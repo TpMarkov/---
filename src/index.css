@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Jura", "Poppins", system-ui, -apple-system, sans-serif;
+  --font-sans: "Poppins", "Jura", system-ui, -apple-system, sans-serif;
   --font-jura: "Jura", sans-serif;
   --font-poppins: "Poppins", sans-serif;
 

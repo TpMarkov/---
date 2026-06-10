@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowUp, Mail, MapPin, Phone, Instagram, Facebook, Send } from "lucide-react";
+import LiloviLogo from "./LiloviLogo";
 
 interface FooterProps {
   lang: "BG" | "EN";
@@ -20,8 +21,8 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
       address: "ул. 'Индустриална' 44, София, България",
       phone: "+359 888 88 88 88",
       officeHours: "Пон - Пет: 09:00 - 18:00",
-      copyright: "© 2026 АТЛАНТА МЕБЕЛИ. Всички права запазени.",
-      designCredits: "Концепция вдъхновена от Atlanta Furniture & 3D FlipBook",
+      copyright: "© 2026 ЛИЛОВИ МЕБЕЛИ. Всички права запазени.",
+      designCredits: "Концепция вдъхновена от Lilovi Furniture & 3D FlipBook",
       scrollTitle: "Нагоре",
     },
     EN: {
@@ -33,8 +34,8 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
       address: "44 Industrial Str., Sofia, Bulgaria",
       phone: "+359 888 88 88 88",
       officeHours: "Mon - Fri: 09:00 - 18:00",
-      copyright: "© 2026 ATLANTA FURNISHINGS. All rights reserved.",
-      designCredits: "High Fidelity Recreation of Atlanta Furniture Digital Experience",
+      copyright: "© 2026 LILOVI FURNISHINGS. All rights reserved.",
+      designCredits: "High Fidelity Recreation of Lilovi Furniture Digital Experience",
       scrollTitle: "Back to Top",
     },
   }[lang];
@@ -57,17 +58,12 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
           {/* Brand Col */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <img
-                src="https://atlanta.bg/storage/settings/April2026/NJRfJAwfUwMazRhQmkpD.png"
-                alt="Atlanta Dark Logo"
-                className="h-8 w-auto object-contain brightness-0 invert"
-                referrerPolicy="no-referrer"
-              />
-              <span className="font-jura text-[15px] font-black tracking-[0.2em] uppercase">
-                ATLANTA
+              <LiloviLogo className="h-10 w-auto" />
+              <span className="font-jura text-[16px] font-black tracking-[0.2em] uppercase">
+                LILOVI
               </span>
             </div>
-            <p className="font-sans text-xs text-neutral-400 leading-relaxed">
+            <p className="font-sans text-[13px] text-neutral-300 leading-relaxed">
               {tr.desc}
             </p>
           </div>
@@ -77,7 +73,7 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
             <h4 className="font-jura text-xs font-bold tracking-widest uppercase text-primary">
               {tr.addressTitle}
             </h4>
-            <div className="space-y-4 font-sans text-xs text-neutral-400">
+            <div className="space-y-4 font-sans text-[13px] text-neutral-300">
               <p className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 shrink-0 text-primary mt-0.5" />
                 <span>{tr.address}</span>
@@ -90,7 +86,7 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
                 <Mail className="w-4 h-4 shrink-0 text-primary" />
                 <span>office@atlanta-furnishings.bg</span>
               </p>
-              <p className="text-[10px] text-neutral-500 font-mono">
+              <p className="text-xs text-neutral-400 font-sans font-medium">
                 {tr.officeHours}
               </p>
             </div>
@@ -101,7 +97,7 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
             <h4 className="font-jura text-xs font-bold tracking-widest uppercase text-primary">
               Site Navigation
             </h4>
-            <div className="flex flex-col gap-3 font-jura text-xs font-bold uppercase tracking-wider text-neutral-400">
+            <div className="flex flex-col gap-3 font-jura text-[13px] font-bold uppercase tracking-wider text-neutral-300">
               <a href="#products-section" className="hover:text-primary transition-colors">
                 {lang === "BG" ? "Колекция" : "Collection Grid"}
               </a>
@@ -128,7 +124,7 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
                   value={subEmail}
                   onChange={(e) => setSubEmail(e.target.value)}
                   placeholder={tr.subPl}
-                  className="w-full bg-neutral-800 text-xs border border-neutral-700 focus:border-primary outline-none py-3.5 pl-4 pr-12 rounded-xl text-white placeholder-neutral-500 font-sans"
+                  className="w-full bg-neutral-800 text-sm border border-neutral-700 focus:border-primary outline-none py-3.5 pl-4 pr-12 rounded-xl text-white placeholder-neutral-400 font-sans"
                 />
                 <button
                   type="submit"
@@ -175,17 +171,17 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
         {/* Lower section */}
         <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-1.5 text-center sm:text-left">
-            <p className="text-[11px] font-sans text-neutral-500">
+            <p className="text-xs font-sans text-neutral-300 font-medium">
               {tr.copyright}
             </p>
-            <p className="text-[9px] font-mono text-neutral-600">
+            <p className="text-xs font-sans text-neutral-400">
               {tr.designCredits}
             </p>
           </div>
 
           <button
             onClick={onScrollToTop}
-            className="flex items-center gap-2 group font-jura text-[11px] font-extrabold uppercase tracking-widest text-[#E85B5B] hover:text-white hover:bg-[#E85B5B] transition-all px-4 py-2 rounded-full border border-[#E85B5B]/30 cursor-pointer"
+            className="flex items-center gap-2 group font-jura text-[12px] font-extrabold uppercase tracking-widest text-[#E85B5B] hover:text-white hover:bg-[#E85B5B] transition-all px-5 py-2.5 rounded-full border border-[#E85B5B]/30 cursor-pointer"
             aria-label="Scroll back to top"
           >
             <span>{tr.scrollTitle}</span>

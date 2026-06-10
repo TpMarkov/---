@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { ArrowDown, Flame, Compass, Sparkles } from "lucide-react";
+import LiloviLogo from "./LiloviLogo";
 
 interface HeroProps {
   lang: "BG" | "EN";
@@ -21,7 +22,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
       metric1Sub: "100% Възобновяеми сертифицирани гори",
       metric2: "Сглобка",
       metric2Sub: "Ръчно напасвани компоненти",
-      badgeText: "АТЛАНТА МЕБЕЛИ",
+      badgeText: "LILOVI WOODEN ELEGANCE",
     },
     EN: {
       tag: "PREMIUM SEASON 2024–2025",
@@ -34,7 +35,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
       metric1Sub: "100% Certified organic hardwoods",
       metric2: "Joinery",
       metric2Sub: "Generational hand-mated parts",
-      badgeText: "ATLANTA FURNISHINGS",
+      badgeText: "LILOVI WOODEN ELEGANCE",
     },
   }[lang];
 
@@ -121,7 +122,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
                 <div className="w-10 h-10 rounded-full border-2 border-white bg-neutral-300"></div>
                 <div className="w-10 h-10 rounded-full border-2 border-white bg-neutral-400"></div>
               </div>
-              <div className="text-[11px] leading-tight uppercase font-bold tracking-wide text-brand-gray">
+              <div className="text-xs leading-tight uppercase font-bold tracking-wide text-neutral-700">
                 {lang === "BG" ? "Доверие от 500+" : "Trusted by 500+"} <br/> <span className="text-primary">{lang === "BG" ? "дизайнери по света" : "Designers globally"}</span>
               </div>
             </motion.div>
@@ -142,7 +143,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
               
               <button
                 onClick={onCatalogue}
-                className="font-jura text-[11px] font-bold tracking-widest uppercase bg-transparent text-[#333] hover:text-primary border border-neutral-300 hover:border-primary/80 px-8 py-3.5 rounded-full transition-all active:scale-95 cursor-pointer"
+                className="font-jura text-xs font-bold tracking-widest uppercase bg-transparent text-[#333] hover:text-primary border border-neutral-300 hover:border-primary/80 px-8 py-3.5 rounded-full transition-all active:scale-95 cursor-pointer"
               >
                 {tr.openCatalogue}
               </button>
@@ -195,12 +196,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
                 }}
                 className="relative w-28 h-28 flex items-center justify-center rounded-full bg-white border border-neutral-100 shadow-xl"
               >
-                <img
-                  src="https://atlanta.bg/storage/settings/April2026/WABSSseOGc3zUbdE9cs9.png"
-                  alt="Favicon Emblem"
-                  className="w-10 h-10 object-contain absolute"
-                  referrerPolicy="no-referrer"
-                />
+                <LiloviLogo iconOnly className="w-10 h-10 absolute" />
                 
                 {/* SVG Text Curve */}
                 <svg viewBox="0 0 100 100" className="w-[100px] h-[100px]">
@@ -238,7 +234,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#333]/70 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-6 left-6 text-white space-y-1 pointer-events-none">
-                  <span className="font-jura text-[10px] tracking-widest text-[#E85B5B] font-bold uppercase">
+                  <span className="font-jura text-xs tracking-widest text-[#E85B5B] font-bold uppercase">
                     01 // STUDY CHAIR
                   </span>
                   <h3 className="font-jura text-lg font-bold uppercase tracking-wider">
@@ -271,11 +267,11 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
                 transition={{ duration: 1, delay: 0.4 }}
                 className="col-span-5 bg-[#E85B5B] rounded-[40px] p-6 flex flex-col justify-between -mt-20 z-10 h-[180px] text-white shadow-xl"
               >
-                <div className="text-[10px] font-jura tracking-widest uppercase opacity-80 font-bold">
+                <div className="text-xs font-jura tracking-widest uppercase opacity-90 font-bold">
                   {lang === "BG" ? "НОВО ИЗДАНИЕ" : "CATALOGUE RELEASE"}
                 </div>
                 <div className="space-y-1">
-                  <div className="font-jura text-xs opacity-75 uppercase">
+                  <div className="font-jura text-xs opacity-80 uppercase font-medium">
                     {lang === "BG" ? "Колекция:" : "Collection:"}
                   </div>
                   <div className="font-jura text-lg font-extrabold uppercase tracking-wide leading-tight">
@@ -287,7 +283,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
                 </div>
                 <button
                   onClick={onExplore}
-                  className="inline-flex items-center gap-1.5 font-jura text-[10px] uppercase font-bold text-white hover:underline mt-2 cursor-pointer self-start"
+                  className="inline-flex items-center gap-1.5 font-jura text-xs uppercase font-bold text-white hover:underline mt-2 cursor-pointer self-start"
                 >
                   <span>{lang === "BG" ? "Разгледaj" : "Request Quote"}</span>
                   <ArrowDown className="w-3 h-3 -rotate-90" />
