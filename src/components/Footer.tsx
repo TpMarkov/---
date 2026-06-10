@@ -84,7 +84,7 @@ export default function Footer({ lang, onScrollToTop }: FooterProps) {
               </p>
               <p className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 shrink-0 text-primary" />
-                <span>office@atlanta-furnishings.bg</span>
+                <span>office@lilovi88.com</span>
               </p>
               <p className="text-xs text-neutral-400 font-sans font-medium">
                 {tr.officeHours}
