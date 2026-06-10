@@ -28,6 +28,8 @@ export default function QuoteRequestSection({
 
   const [formSubmitted, setFormSubmitted] = React.useState(false);
   const [uniqueQuoteId, setUniqueQuoteId] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
 
   const tr = {
     BG: {
@@ -88,16 +90,50 @@ export default function QuoteRequestSection({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (cart.length === 0) return;
+    if (cart.length === 0 || isSubmitting) return;
     if (!formData.fullName || !formData.email || !formData.phone) return;
 
-    // Generate random quote reference ID
+    setIsSubmitting(true);
+    setSubmitError(null);
+
     const randomId = "QT-" + Math.floor(100000 + Math.random() * 900000);
-    setUniqueQuoteId(randomId);
-    setFormSubmitted(true);
-    onSubmitSuccess();
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          cart,
+          totalAmount,
+          uniqueQuoteId: randomId,
+          lang,
+        }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.error || "Failed to process quote request on server.");
+      }
+
+      await response.json(); // Clean read
+      setUniqueQuoteId(randomId);
+      setFormSubmitted(true);
+      onSubmitSuccess();
+    } catch (err: any) {
+      console.error("Quote submit error:", err);
+      setSubmitError(
+        lang === "BG"
+          ? "Неуспешно изпращане. Моля, опитайте отново или се свържете директно по имейл."
+          : "Submission failed. Please check network and SMTP parameters, or contact support."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -307,15 +343,25 @@ export default function QuoteRequestSection({
                   </div>
 
                   {/* Submission triggers */}
-                  <div className="pt-2">
+                  <div className="pt-2 space-y-3">
+                    {submitError && (
+                      <div className="p-3 bg-red-50 border border-red-100 text-red-600 rounded-xl text-xs font-sans text-center font-medium animate-pulse">
+                        {submitError}
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      disabled={cart.length === 0}
+                      disabled={cart.length === 0 || isSubmitting}
                       className="w-full flex items-center justify-center gap-2 font-jura text-[12px] font-bold tracking-widest uppercase text-white bg-primary disabled:bg-neutral-200 disabled:text-neutral-400 disabled:pointer-events-none disabled:shadow-none py-4 rounded-full hover:bg-red-600 transition-all shadow-xl shadow-primary/30 cursor-pointer border-none"
                       id="quote-submit-btn"
                     >
-                      <Send className="w-4 h-4" />
-                      <span>{tr.submitBtn}</span>
+                      {isSubmitting ? (
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      ) : (
+                        <Send className="w-4 h-4" />
+                      )}
+                      <span>{isSubmitting ? tr.submitting : tr.submitBtn}</span>
                     </button>
                     
                     <p className="text-center text-[9px] font-sans text-brand-gray mt-3">
