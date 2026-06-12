@@ -3,7 +3,7 @@ export interface Product {
   nameBG: string;
   nameEN: string;
   price: number;
-  category: "living" | "dining" | "bedroom" | "office";
+  category: "classic" | "embossed" | "cross" | "armchair";
   image: string;
   descriptionBG: string;
   descriptionEN: string;

@@ -11,7 +11,14 @@ interface ProductGridProps {
   setActiveFilter?: (filter: CategoryFilter) => void;
 }
 
-type CategoryFilter = "all" | "living" | "dining" | "bedroom" | "office";
+type CategoryFilter = "all" | "classic" | "embossed" | "cross" | "armchair";
+
+interface ProductGridProps {
+  lang: "BG" | "EN";
+  onProductClick: (product: Product) => void;
+  activeFilter?: CategoryFilter;
+  setActiveFilter?: (filter: CategoryFilter) => void;
+}
 
 export default function ProductGrid({ lang, onProductClick, activeFilter, setActiveFilter }: ProductGridProps) {
   const [localFilter, setLocalFilter] = React.useState<CategoryFilter>("all");
@@ -21,28 +28,30 @@ export default function ProductGrid({ lang, onProductClick, activeFilter, setAct
 
   const tr = {
     BG: {
-      sectionTitle: "Дизайнерска Колекция Мебели",
-      sectionSub: "Прецизно проектирани за поколения • Открийте своя съвършен детайл",
+      sectionTitle: "Дизайнерски Серии Виенски Столове",
+      sectionSub: "Прецизно парно огънати заведения и домове • Селектирайте серия за Вашия интериор",
       all: "Всички",
-      living: "Дневна",
-      dining: "Трапезария",
-      bedroom: "Спалня",
-      office: "Кабинет",
+      classic: "Класик Тонет",
+      embossed: "Гравирани серия",
+      cross: "Кросбек / Cross",
+      armchair: "Премиум & Кресла",
       newBadge: "НОВО",
       viewDetail: "Бърз Преглед",
-      starting: "Стойност",
+      starting: "Цени",
+      uponRequest: "При запитване",
     },
     EN: {
-      sectionTitle: "The Curated Furnishings Grid",
-      sectionSub: "Bespoke structures designed to persist for generations • Filter your spatial focus",
-      all: "All Designs",
-      living: "Living Space",
-      dining: "Dining Room",
-      bedroom: "Sleeping Suite",
-      office: "Workspace",
+      sectionTitle: "Handcrafted Viennese Seating",
+      sectionSub: "Traditional steam-bent structures engineered to persist for generations • Filter your interior focus",
+      all: "All Chairs",
+      classic: "Classic Thonet",
+      embossed: "Embossed Relief",
+      cross: "Cross-Back Series",
+      armchair: "Premium & Armchairs",
       newBadge: "NEW IN",
-      viewDetail: "Quick Inspect",
+      viewDetail: "Quick View",
       starting: "Pricing",
+      uponRequest: "Upon Request",
     },
   }[lang];
 
@@ -52,10 +61,10 @@ export default function ProductGrid({ lang, onProductClick, activeFilter, setAct
 
   const filters: { value: CategoryFilter; label: string }[] = [
     { value: "all", label: tr.all },
-    { value: "living", label: tr.living },
-    { value: "dining", label: tr.dining },
-    { value: "bedroom", label: tr.bedroom },
-    { value: "office", label: tr.office },
+    { value: "classic", label: tr.classic },
+    { value: "embossed", label: tr.embossed },
+    { value: "cross", label: tr.cross },
+    { value: "armchair", label: tr.armchair },
   ];
 
   return (
@@ -176,11 +185,11 @@ export default function ProductGrid({ lang, onProductClick, activeFilter, setAct
                           {name}
                         </h3>
                         <div className="text-right">
-                          <span className="block font-sans text-[9px] text-neutral-400 tracking-wider uppercase font-bold">
+                          <span className="block font-sans text-[9px] text-primary/80 tracking-wider uppercase font-bold">
                             {tr.starting}
                           </span>
-                          <span className="font-mono text-sm font-bold text-dark">
-                            €{product.price.toLocaleString("de-DE")}
+                          <span className="font-sans text-xs font-semibold text-neutral-500 uppercase tracking-tight">
+                            {tr.uponRequest}
                           </span>
                         </div>
                       </div>

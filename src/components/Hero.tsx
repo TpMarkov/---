@@ -1,7 +1,6 @@
 import React from "react";
-import { motion, useScroll, useTransform } from "motion/react";
-import { ArrowDown, Flame, Compass, Sparkles, Shield, Compass as Needle, Award } from "lucide-react";
-import LiloviLogo from "./LiloviLogo";
+import { motion } from "motion/react";
+import { ArrowDown, Award, Sparkles, Shield, Compass, Star } from "lucide-react";
 
 interface HeroProps {
   lang: "BG" | "EN";
@@ -22,51 +21,50 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
 
   const tr = {
     BG: {
-      tag: "ПРЕМИУМ ЛИНИЯ // АТЕЛИЕ LILOVI",
-      titlePart1: "КЪДЕТО ПРОСТРАНСТВОТО СРЕЩА",
-      titlePart2: "СКУЛПТУРНАТА ТИШИНА",
-      sub: "Бутикови мебели от селектирана вековна дървесина, проектирани за вечен архитектурен мащаб и изключителен акустичен комфорт. Ръчна изработка в нашето семейно ателие.",
-      explore: "Разгледайте Колекцията",
-      viewBook: "Дигитален Лъч-Каталог",
-      trustBadge: "100% АВТЕНТИЧНО БЪЛГАРСКО ПРОИЗВОДСТВО",
-      qHeader: "КАКВО НИ ПРАВИ РАЗЛИЧНИ?",
-      qBody: "За разлика от масовите мебели от ПДЧ, които отделят лепила и губят стойност, ние работим изцяло с масивен дъб и американски орех. Мебелите ни подобряват домашната акустика и придобиват благородна патина.",
-      metricTitle1: "Материал",
-      metricSub1: "Масивна дъбова дървесина с произход от сертифицирани родни гори",
-      metricTitle2: "Сглобка",
-      metricSub2: "Занаятчийски двойни гнездови сглобки без метални крепежи",
-      metricTitle3: "Стандарт",
-      metricSub3: "Ленено био масло и немски вакси, сертифицирани за бебешки играчки",
+      tag: "БЪЛГАРСКИ ПРОИЗВОДИТЕЛ // СЪЗДАДЕНИ ОТ 1996",
+      titlePart1: "Премиум виенски столове за",
+      titlePart2: "Заведения & Интериорен Дизайн",
+      sub: "Повече от 25 години Lilovi 88 произвежда висококачествени дървени столове. Нашата селекция съчетава класически европейски дизайн, дълговечност и занаятчийско майсторство за комерсиални и жилищни интериори.",
+      explore: "Вижте Колекцията",
+      viewBook: "Запитване за Цени на Едро",
+      trustBadge: "100% ПЪЛНО ОГЪНАТ МАСИВЕН БУК",
+      qHeader: "СПЕЦИАЛИЗИРАН ПРОИЗВОДИТЕЛ",
+      qBody: "Ние сме тясно специализирани в класическата технология за парно огъване на дървесина в тон с Thonet традицията. Нашите столове издържат десетилетия в ресторанти, кафенета и хотели.",
+      metricTitle1: "Основани през 1996",
+      metricSub1: "Повече от четвърт век занаятчийски опит и десетки хиляди изработени столове",
+      metricTitle2: "Масивна Дървесина",
+      metricSub2: "Задължително ползване на селектиран бук с висока сушилня плътност",
+      metricTitle3: "Гарантирана Якост",
+      metricSub3: "Интегрирани усилващи цанги за изключителна здравина при интензивна употреба",
     },
     EN: {
-      tag: "PREMIUM LINE // LILOVI ATELIER",
-      titlePart1: "WHERE SPACE ENCOUNTERS",
-      titlePart2: "SCULPTURAL SILENCE",
-      sub: "Bespoke furniture forged from centuries-old selected hardwoods, engineered for timeless architectural scale and premium acoustic warmth. Handcrafted in our family-owned atelier.",
-      explore: "Explore the Collection",
-      viewBook: "Digital Pagebook",
-      trustBadge: "100% ARTISANAL EUROPEAN HARDWOOD",
-      qHeader: "WHAT MAKES US DIFFERENT?",
-      qBody: "Unlike fast-furniture constructed from composite particle boards filled with toxic resins, we build exclusively with solid oak, wild ash, and walnut. Our pieces absorb acoustic glare, purify local air quality, and age into heirloom-grade patinas.",
-      metricTitle1: "Source Material",
-      metricSub1: "Solid premium wild oak sourced with full environmental traceability",
-      metricTitle2: "Atelier Joinery",
-      metricSub2: "Generational hand-mated mortise-and-tenon joints with wood dowels",
-      metricTitle3: "Pure Oil finish",
-      metricSub3: "Cold-pressed bio friendly oils and beeswax certified for organic safety",
+      tag: "BULGARIAN MANUFACTURER // ESTABLISHED 1996",
+      titlePart1: "Premium Viennese Chairs for",
+      titlePart2: "Hospitality & Interior Design",
+      sub: "For over 25 years, Lilovi 88 has been crafting high-quality wooden seating furniture. Our Viennese collection combines classic European design, durability and craftsmanship for commercial and residential interiors.",
+      explore: "View Collection",
+      viewBook: "Request Wholesale Pricing",
+      trustBadge: "100% HAND-BENT SOLID BEECHWOOD",
+      qHeader: "SPECIALIST EUROPEAN PRODUCER",
+      qBody: "We specialize deeply in steam-bending hardwoods inspired by the legacy of Thonet. Engineered with fortified joints, made to serve fine spaces for decades.",
+      metricTitle1: "Est. Since 1996",
+      metricSub1: "Over 25 years of manufacturing excellence and thousands of produced items",
+      metricTitle2: "Solid Beechwood",
+      metricSub2: "Sourced locally with strict environmental guidelines and kiln-dry treatment",
+      metricTitle3: "Heavy Duty Grade",
+      metricSub3: "Equipped with dual structural reinforcement arches for high-traffic environments",
     },
   }[lang];
 
   // Parallax offsets
-  const backgroundY = scrollY * 0.45;
-  const overlayY = scrollY * 0.2;
-  const contentY = scrollY * -0.12;
+  const backgroundY = scrollY * 0.35;
+  const contentY = scrollY * -0.08;
 
   // Cinematic horizontal text marquee entries
-  const tickerItems = Array(10).fill(`• ESTABLISHED 2008 • LILOVI ATELIER • HANDCRAFTED WOODCRAFT`);
+  const tickerItems = Array(12).fill(`• VIENNESE CHAIR SPECIALIST • LILOVI 88 • BENTWOOD MANUFACTURER`);
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-luxury-black text-[#FAF6F0] pt-24 md:pt-28" id="hero-classic">
+    <section className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#0d0d0e] text-[#FAF6F0] pt-24 md:pt-28" id="hero-classic">
       
       {/* Cinematic Layer 1: Parallax Background */}
       <div 
@@ -76,22 +74,20 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
         }}
       >
         <img 
-          src="/src/assets/images/luxury_hero_bg_1781243342969.jpg" 
-          alt="Premium luxury wood interior" 
-          className="w-full h-full object-cover object-center filter brightness-[0.45] scale-105"
+          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1600&auto=format&fit=crop" 
+          alt="Premium Viennese Chairs in beautiful cafe interior" 
+          className="w-full h-full object-cover object-center filter brightness-[0.35] scale-105"
           referrerPolicy="no-referrer"
+          loading="eager"
         />
       </div>
 
       {/* Cinematic Layer 2: Complex Golden & Deep Shadow gradient overlay */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-b from-luxury-black/90 via-transparent to-luxury-black z-10 pointer-events-none"
-        style={{ transform: `translateY(${overlayY}px)` }}
-      />
-      <div className="absolute inset-0 bg-radial-at-c from-transparent via-transparent to-luxury-black/70 z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0e]/90 via-transparent to-[#0d0d0e] z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-radial-at-c from-transparent via-transparent to-[#0d0d0e]/85 z-10 pointer-events-none" />
 
       {/* Cinematic Layer 3: Main Editorial Content */}
-      <div className="relative w-full max-w-7xl mx-auto px-6 py-12 md:py-20 flex-1 flex flex-col justify-center z-20">
+      <div className="relative w-full max-w-7xl mx-auto px-6 py-12 md:py-20 flex-grow flex flex-col justify-center z-20">
         <div 
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center transition-transform duration-75 will-change-transform"
           style={{ transform: `translateY(${contentY}px)` }}
@@ -100,7 +96,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
           <div className="lg:col-span-8 space-y-8 text-left">
             
             {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-3 bg-[#FAF6F0]/10 backdrop-blur-md border border-[#C5A880]/30 px-4 py-2 rounded-full shadow-lg">
+            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-md border border-[#C5A880]/30 px-4 py-2 rounded-full shadow-lg">
               <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] animate-pulse" />
               <span className="font-sans text-[10px] md:text-[11px] font-extrabold tracking-[0.25em] text-[#C5A880] uppercase">
                 {tr.tag}
@@ -109,15 +105,15 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
 
             {/* Huge Display Typography Header */}
             <div className="space-y-4">
-              <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.05] text-border-glow">
-                <span className="block italic text-neutral-300 font-light">{tr.titlePart1}</span>
+              <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white leading-[1.05]">
+                <span className="block italic text-neutral-300 font-light text-2xl sm:text-4xl md:text-5xl mb-2">{tr.titlePart1}</span>
                 <span className="block font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C5A880] via-[#E5D5B8] to-white">
                   {tr.titlePart2}
                 </span>
               </h1>
 
               {/* Subtitle */}
-              <p className="font-sans text-[15px] md:text-[17px] leading-relaxed text-neutral-300/90 max-w-[580px] font-light">
+              <p className="font-sans text-[15px] md:text-[17px] leading-relaxed text-neutral-300/95 max-w-[580px] font-light">
                 {tr.sub}
               </p>
             </div>
@@ -128,7 +124,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
                 <Award className="w-24 h-24 text-primary" />
               </div>
               <h3 className="font-serif text-sm tracking-widest text-[#C5A880] uppercase font-bold flex items-center gap-2">
-                <Sparkles className="w-4 h-4" />
+                <Star className="w-4 h-4 fill-primary/30" />
                 {tr.qHeader}
               </h3>
               <p className="font-sans text-xs md:text-[13px] leading-relaxed text-neutral-300 font-light">
@@ -141,15 +137,20 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
               {/* Magnetic style primary button */}
               <button
                 onClick={onExplore}
-                className="group relative inline-flex items-center gap-3 bg-primary text-black font-sans text-[11px] md:text-xs font-bold tracking-widest uppercase px-8 py-4.5 rounded-full hover:bg-white hover:text-dark transition-all duration-300 shadow-[0_4px_30px_rgba(197,168,128,0.25)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.25)] transform active:scale-95 cursor-pointer border-none"
+                className="group relative inline-flex items-center gap-3 bg-primary text-black font-sans text-[11px] md:text-xs font-bold tracking-widest uppercase px-8 py-4.5 rounded-full hover:bg-white hover:text-[#0d0d0e] transition-all duration-300 shadow-[0_4px_30px_rgba(197,168,128,0.25)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.25)] transform active:scale-95 cursor-pointer border-none"
               >
                 <span>{tr.explore}</span>
                 <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
               </button>
 
               <button
-                onClick={onCatalogue}
-                className="inline-flex items-center gap-2 bg-transparent text-[#FAF6F0] hover:text-[#C5A880] border border-white/20 hover:border-primary/80 font-sans text-[11px] md:text-xs font-bold tracking-widest uppercase px-8 py-4.5 rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer"
+                onClick={() => {
+                  const element = document.getElementById("quote-builder-section");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="inline-flex items-center gap-2 bg-transparent text-[#FAF6F0] hover:text-[#C5A880] border border-white/20 hover:border-[#C5A880]/80 font-sans text-[11px] md:text-xs font-bold tracking-widest uppercase px-8 py-4.5 rounded-full transition-all duration-300 transform active:scale-95 cursor-pointer"
               >
                 {tr.viewBook}
               </button>
@@ -168,7 +169,10 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
               }}
               className="relative w-44 h-44 flex items-center justify-center rounded-full bg-black/60 border border-[#C5A880]/30 shadow-2xl backdrop-blur-sm"
             >
-              <LiloviLogo iconOnly className="w-14 h-14 absolute" />
+              <div className="flex flex-col items-center justify-center text-center absolute z-15">
+                <span className="font-serif text-lg font-bold text-[#C5A880] tracking-wider">88</span>
+                <span className="text-[7px] tracking-widest text-neutral-400 font-sans font-bold uppercase">LILOVI</span>
+              </div>
               
               <svg viewBox="0 0 100 100" className="w-[160px] h-[160px]">
                 <path
@@ -190,7 +194,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border-t border-[#C5A880]/20 pt-10 mt-16 z-20">
           <div className="space-y-2 group">
             <div className="flex items-center gap-2.5">
-              <Needle className="w-4.5 h-4.5 text-[#C5A880] transition-transform duration-300 group-hover:rotate-45" />
+              <Compass className="w-4.5 h-4.5 text-[#C5A880] transition-transform duration-300 group-hover:rotate-45" />
               <h4 className="font-serif text-sm tracking-wide text-white font-bold uppercase">
                 01 // {tr.metricTitle1}
               </h4>
@@ -202,7 +206,7 @@ export default function Hero({ lang, onExplore, onCatalogue }: HeroProps) {
 
           <div className="space-y-2 group">
             <div className="flex items-center gap-2.5">
-              <Flame className="w-4.5 h-4.5 text-[#C5A880] transition-transform duration-300 group-hover:scale-110" />
+              <Sparkles className="w-4.5 h-4.5 text-[#C5A880] transition-transform duration-300 group-hover:scale-110" />
               <h4 className="font-serif text-sm tracking-wide text-white font-bold uppercase">
                 02 // {tr.metricTitle2}
               </h4>

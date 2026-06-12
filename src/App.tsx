@@ -19,6 +19,7 @@ import ProjectBeforeAfterSlider from "./components/ProjectBeforeAfterSlider";
 import TestimonialsCarousel from "./components/TestimonialsCarousel";
 import LuxuryCTA from "./components/LuxuryCTA";
 import FloatingWidgets from "./components/FloatingWidgets";
+import FAQSection from "./components/FAQSection";
 
 export default function App() {
   const [lang, setLang] = React.useState<"BG" | "EN">("EN");
@@ -26,7 +27,7 @@ export default function App() {
   const [cart, setCart] = React.useState<CartItem[]>([]);
   const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
-  const [activeCategoryFilter, setActiveCategoryFilter] = React.useState<"all" | "living" | "dining" | "bedroom" | "office">("all");
+  const [activeCategoryFilter, setActiveCategoryFilter] = React.useState<"all" | "classic" | "embossed" | "cross" | "armchair">("all");
 
   // Load cart on mount
   React.useEffect(() => {
@@ -203,6 +204,9 @@ export default function App() {
 
         {/* Designer client recommendations */}
         <TestimonialsCarousel lang={lang} />
+
+        {/* Comprehensive SEO FAQ Block */}
+        <FAQSection lang={lang} />
 
         {/* Architecture sample request Call to Action */}
         <LuxuryCTA
