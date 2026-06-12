@@ -30,6 +30,7 @@ export default function QuoteRequestSection({
   const [uniqueQuoteId, setUniqueQuoteId] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
+  const [isGoogleAppPasswordError, setIsGoogleAppPasswordError] = React.useState(false);
 
   const tr = {
     BG: {
@@ -126,11 +127,11 @@ export default function QuoteRequestSection({
       onSubmitSuccess();
     } catch (err: any) {
       console.error("Quote submit error:", err);
-      setSubmitError(
-        lang === "BG"
-          ? "Неуспешно изпращане. Моля, опитайте отново или се свържете директно по имейл."
-          : "Submission failed. Please check network and SMTP parameters, or contact support."
-      );
+      const errMsg = err.message || "";
+      const isGoogleIssue = errMsg.includes("Application-specific password") || errMsg.includes("534-5.7.9");
+      
+      setSubmitError(errMsg);
+      setIsGoogleAppPasswordError(isGoogleIssue);
     } finally {
       setIsSubmitting(false);
     }
@@ -343,10 +344,74 @@ export default function QuoteRequestSection({
                   </div>
 
                   {/* Submission triggers */}
-                  <div className="pt-2 space-y-3">
+                  <div className="pt-2 space-y-4">
                     {submitError && (
-                      <div className="p-3 bg-red-50 border border-red-100 text-red-600 rounded-xl text-xs font-sans text-center font-medium animate-pulse">
-                        {submitError}
+                      <div className="space-y-3">
+                        <div className="p-4 bg-red-50/90 border border-red-200 text-red-700 rounded-2xl text-xs font-sans text-left leading-relaxed">
+                          <strong className="block font-bold text-red-800 mb-1">
+                            {lang === "BG" ? "Системна грешка при изпращане:" : "System submission error:"}
+                          </strong>
+                          {submitError}
+                        </div>
+
+                        {isGoogleAppPasswordError && (
+                          <div className="p-5 bg-amber-50 border border-amber-200/90 rounded-2xl text-xs font-sans text-left text-neutral-800 space-y-3 shadow-sm">
+                            <div className="flex items-start gap-2.5">
+                              <span className="text-xl leading-none">⚠️</span>
+                              <div>
+                                <h4 className="font-bold text-amber-900 text-sm">
+                                  {lang === "BG"
+                                    ? "Изисква се Google Апликационна Парола (App Password)"
+                                    : "Google App Password Required"}
+                                </h4>
+                                <p className="text-neutral-600 mt-1 leading-relaxed">
+                                  {lang === "BG"
+                                    ? "Gmail акаунтът ви използва 2-Step Verification. За да го свържете с уебсайта на Lilovi, не можете да използвате основната си парола. Трябва да генерирате 16-знаков код от настройките на вашия Google акаунт:"
+                                    : "Your Gmail account has 2-Step Verification enabled. To connect it safely, you cannot use your main login password. You must generate a unique 16-character code in your Google Account Settings:"}
+                                </p>
+                              </div>
+                            </div>
+
+                            <ol className="list-decimal list-inside space-y-1.5 text-neutral-700 pl-1 font-medium bg-white/60 p-3 rounded-xl border border-amber-100">
+                              <li>
+                                {lang === "BG" ? (
+                                  <>Отидете на <a href="https://myaccount.google.com" target="_blank" rel="noopener noreferrer" className="text-[#E85B5B] underline font-bold hover:text-red-600">myaccount.google.com</a></>
+                                ) : (
+                                  <>Go to <a href="https://myaccount.google.com" target="_blank" rel="noopener noreferrer" className="text-[#E85B5B] underline font-bold hover:text-red-600">myaccount.google.com</a></>
+                                )}
+                              </li>
+                              <li>
+                                {lang === "BG"
+                                  ? "Изберете раздел 'Сигурност' (Security) от лявото меню."
+                                  : "Select the 'Security' tab from the sidebar."}
+                              </li>
+                              <li>
+                                {lang === "BG"
+                                  ? "Въведете 'App passwords' (или Апликационни пароли) в полето за търсене в горната част."
+                                  : "Write 'App passwords' in the search bar at the top."}
+                              </li>
+                              <li>
+                                {lang === "BG"
+                                  ? "Въведете произволно име (напр. 'Lilovi Website') и натиснете 'Create' (Създай)."
+                                  : "Type an app identifier (e.g. 'Lilovi Website') and click 'Create'."}
+                              </li>
+                              <li>
+                                {lang === "BG"
+                                  ? "Копирайте генерирания 16-знаков жълт код (напр. xxxx xxxx xxxx xxxx)."
+                                  : "Copy the custom 16-character yellow code shown (e.g. xxxx xxxx xxxx xxxx)."}
+                              </li>
+                              <li>
+                                {lang === "BG"
+                                  ? "Въведете този 16-знаков код на мястото на паролата 'Doktora922' във вашата настроена SMTP секретна парола (SMTP_PASS)."
+                                  : "Replace your normal password 'Doktora922' with this 16-character code inside your SMTP_PASS settings."}
+                              </li>
+                            </ol>
+                            
+                            <p className="text-[10px] text-neutral-500 italic">
+                              * {lang === "BG" ? "Сигурността на Google изисква това за всички изходящи приложения." : "Google security mandates this procedure for external email automation client integration."}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     )}
 

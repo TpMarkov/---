@@ -7,12 +7,17 @@ import { Product } from "../types";
 interface ProductGridProps {
   lang: "BG" | "EN";
   onProductClick: (product: Product) => void;
+  activeFilter?: CategoryFilter;
+  setActiveFilter?: (filter: CategoryFilter) => void;
 }
 
 type CategoryFilter = "all" | "living" | "dining" | "bedroom" | "office";
 
-export default function ProductGrid({ lang, onProductClick }: ProductGridProps) {
-  const [activeFilter, setActiveFilter] = React.useState<CategoryFilter>("all");
+export default function ProductGrid({ lang, onProductClick, activeFilter, setActiveFilter }: ProductGridProps) {
+  const [localFilter, setLocalFilter] = React.useState<CategoryFilter>("all");
+
+  const filterToUse = activeFilter !== undefined ? activeFilter : localFilter;
+  const setFilterToUse = setActiveFilter !== undefined ? setActiveFilter : setLocalFilter;
 
   const tr = {
     BG: {
@@ -42,7 +47,7 @@ export default function ProductGrid({ lang, onProductClick }: ProductGridProps) 
   }[lang];
 
   const filteredProducts = PRODUCTS.filter(
-    (product) => activeFilter === "all" || product.category === activeFilter
+    (product) => filterToUse === "all" || product.category === filterToUse
   );
 
   const filters: { value: CategoryFilter; label: string }[] = [
@@ -54,30 +59,30 @@ export default function ProductGrid({ lang, onProductClick }: ProductGridProps) 
   ];
 
   return (
-    <section id="products-section" className="py-24 px-6 bg-white scroll-mt-12">
+    <section id="products-section" className="py-24 px-6 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto">
         
         {/* Gallery Section Header Block */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 border-b border-rose-500 pb-1">
-              <span className="font-jura text-[10px] tracking-[0.3em] font-extrabold text-primary uppercase">
-                [ {lang === "BG" ? "СКАНДИНАВСКО КАЧЕСТВО" : "NORDIC ARCHITECTURE"} ]
+            <div className="inline-flex items-center gap-2 border-b border-[#C5A880] pb-1">
+              <span className="font-sans text-[10px] tracking-[0.3em] font-extrabold text-primary uppercase">
+                [ {lang === "BG" ? "АТЕЛИЕ LILOVI" : "LILOVI ATELIER"} ]
               </span>
             </div>
-            <h2 className="font-jura text-3xl md:text-4xl font-extrabold text-dark tracking-tight uppercase leading-none">
+            <h2 className="font-serif text-3xl md:text-5xl font-medium text-dark tracking-tight leading-none">
               {tr.sectionTitle}
             </h2>
-            <p className="font-sans text-sm text-brand-gray max-w-xl">
+            <p className="font-sans text-sm text-neutral-500 max-w-xl font-light">
               {tr.sectionSub}
             </p>
           </div>
 
           {/* Filtering Tools Row */}
           <div className="flex flex-wrap items-center gap-2 border-t border-b md:border-none border-neutral-100 py-4 md:py-0">
-            <div className="flex items-center gap-2 mr-3 text-brand-gray">
-              <SlidersHorizontal className="w-4 h-4" />
-              <span className="font-jura text-xs font-bold uppercase tracking-widest">
+            <div className="flex items-center gap-2 mr-3 text-neutral-500">
+              <SlidersHorizontal className="w-4 h-4 text-primary" />
+              <span className="font-sans text-xs font-bold uppercase tracking-widest text-[#C5A880]">
                 Filters
               </span>
             </div>
@@ -85,10 +90,10 @@ export default function ProductGrid({ lang, onProductClick }: ProductGridProps) 
             {filters.map((filter) => (
               <button
                 key={filter.value}
-                onClick={() => setActiveFilter(filter.value)}
-                className={`font-jura text-[11px] font-bold tracking-wider uppercase px-4 py-2 rounded-full border transition-all cursor-pointer ${
-                  activeFilter === filter.value
-                    ? "bg-primary border-primary text-white shadow-lg shadow-primary/30"
+                onClick={() => setFilterToUse(filter.value)}
+                className={`font-sans text-[11px] font-bold tracking-wider uppercase px-5 py-2.5 rounded-full border transition-all cursor-pointer ${
+                  filterToUse === filter.value
+                    ? "bg-primary border-primary text-dark shadow-lg shadow-primary/20"
                     : "bg-transparent border-neutral-200 text-neutral-600 hover:border-dark hover:text-dark"
                 }`}
                 aria-label={`Filter by ${filter.label}`}
@@ -146,7 +151,7 @@ export default function ProductGrid({ lang, onProductClick }: ProductGridProps) 
 
                     {/* NEW floating tag */}
                     {product.isNew && (
-                      <span className="absolute top-4 left-4 inline-flex items-center gap-1 bg-primary text-white font-jura text-[9px] font-bold tracking-widest px-3 py-1 rounded-full shadow-lg shadow-primary/20 border border-white">
+                      <span className="absolute top-4 left-4 inline-flex items-center gap-1 bg-primary text-[#0d0d0e] font-sans text-[9px] font-extrabold tracking-widest px-3 py-1.5 rounded-full shadow-lg shadow-primary/20 border border-white/20">
                         {tr.newBadge}
                       </span>
                     )}
@@ -162,25 +167,25 @@ export default function ProductGrid({ lang, onProductClick }: ProductGridProps) 
                   <div className="mt-6 flex-1 flex flex-col justify-between">
                     <div>
                       {/* Designer, Title */}
-                      <p className="font-jura text-[10px] font-bold uppercase text-primary/80 tracking-widest">
+                      <p className="font-sans text-[10px] font-extrabold uppercase text-primary tracking-widest">
                         {product.designer}
                       </p>
 
                       <div className="flex items-start justify-between gap-4 mt-2">
-                        <h3 className="font-jura text-base font-extrabold text-dark uppercase tracking-tight group-hover:text-primary transition-colors">
+                        <h3 className="font-serif text-base font-bold text-dark tracking-tight hover:text-primary transition-colors">
                           {name}
                         </h3>
                         <div className="text-right">
-                          <span className="block font-jura text-[9px] text-brand-gray tracking-wider uppercase">
+                          <span className="block font-sans text-[9px] text-neutral-400 tracking-wider uppercase font-bold">
                             {tr.starting}
                           </span>
-                          <span className="font-mono text-sm font-semibold text-dark">
+                          <span className="font-mono text-sm font-bold text-dark">
                             €{product.price.toLocaleString("de-DE")}
                           </span>
                         </div>
                       </div>
 
-                      <p className="font-sans text-xs text-brand-gray leading-relaxed font-normal mt-3 line-clamp-2">
+                      <p className="font-sans text-xs text-neutral-500 leading-relaxed font-light mt-3 line-clamp-2">
                         {desc}
                       </p>
                     </div>
@@ -191,14 +196,14 @@ export default function ProductGrid({ lang, onProductClick }: ProductGridProps) 
                         {(lang === "BG" ? product.materialsBG : product.materialsEN).slice(0, 2).map((mat, idx) => (
                           <span
                             key={idx}
-                            className="font-jura text-[9px] text-neutral-500 font-semibold px-2 py-0.5 bg-neutral-100 rounded-md uppercase"
+                            className="font-sans text-[9px] text-neutral-600 font-bold px-2.5 py-1 bg-[#FAF6F0] border border-primary/10 rounded-md uppercase"
                           >
                             {mat}
                           </span>
                         ))}
                       </div>
 
-                      <div className="w-8 h-8 rounded-full border border-neutral-200 flex items-center justify-center text-dark group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all cursor-pointer">
+                      <div className="w-8 h-8 rounded-full border border-neutral-200 flex items-center justify-center text-dark group-hover:bg-primary group-hover:border-primary group-hover:text-dark transition-all duration-300 cursor-pointer">
                         <ArrowUpRight className="w-4 h-4 transform group-hover:rotate-45 transition-transform" />
                       </div>
                     </div>

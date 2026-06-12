@@ -1,37 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Jura:wght@400;600;700;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Poppins", "Jura", system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
   --font-jura: "Jura", sans-serif;
-  --font-poppins: "Poppins", sans-serif;
 
-  --color-primary: #E85B5B;
-  --color-accent: #E85B5B;
-  --color-secondary: #6C757D;
-  --color-brand-gray: #848484;
-  --color-dark: #333333;
-  --color-link: #FF5151;
-  --color-warm-bg: #FCFCFC;
+  --color-primary: #C5A880; /* Branded Luxury Muted Gold */
+  --color-primary-dark: #A48962; /* Burnished Gold */
+  --color-accent: #C5A880;
+  --color-secondary: #8E8A85; /* Soft Muted Slate Gray */
+  --color-brand-gray: #A19E9A;
+  --color-dark: #111111; /* Luxury deep charcoal-black */
+  --color-luxury-black: #0D0D0E; /* Extra deep midnight-black */
+  --color-beige: #FAF6F0; /* Soft linen sand beige */
+  --color-beige-dark: #F3ECE2; /* Deeper beige */
+  --color-link: #C5A880;
+  --color-warm-bg: #FAF6F0;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-background);
+  background-color: #FAF6F0;
   color: var(--color-dark);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* Custom scrollbars and styling in context of fluid layout */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Lenis smooth scrolling helper styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  scroll-boundary-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom gorgeous luxury scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #111111;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E85B5B;
-  border-radius: 4px;
+  background: #C5A880;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c74b4b;
+  background: #A48962;
 }
+
+/* Text glow support */
+.text-border-glow {
+  text-shadow: 0 0 40px rgba(197, 168, 128, 0.25);
+}
+
+/* Glassmorphism effects */
+.luxury-glass {
+  background: rgba(13, 13, 14, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(197, 168, 128, 0.12);
+}
+
+.luxury-glass-light {
+  background: rgba(250, 246, 240, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(197, 168, 128, 0.15);
+}
+

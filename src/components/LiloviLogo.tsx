@@ -6,7 +6,7 @@ interface LiloviLogoProps {
   iconOnly?: boolean;
 }
 
-export default function LiloviLogo({ className = "h-11 w-auto", color = "#E85B5B", iconOnly = false }: LiloviLogoProps) {
+export default function LiloviLogo({ className = "h-11 w-auto", color = "#C5A880", iconOnly = false }: LiloviLogoProps) {
   if (iconOnly) {
     return (
       <svg

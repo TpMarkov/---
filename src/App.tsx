@@ -11,12 +11,22 @@ import CookieConsent from "./components/CookieConsent";
 import { Product, CartItem } from "./types";
 import LiloviLogo from "./components/LiloviLogo";
 
+import CategoryShowcaseGrid from "./components/CategoryShowcaseGrid";
+import ManufacturingTimeline from "./components/ManufacturingTimeline";
+import StatisticsCounter from "./components/StatisticsCounter";
+import MagazineFeaturedCollection from "./components/MagazineFeaturedCollection";
+import ProjectBeforeAfterSlider from "./components/ProjectBeforeAfterSlider";
+import TestimonialsCarousel from "./components/TestimonialsCarousel";
+import LuxuryCTA from "./components/LuxuryCTA";
+import FloatingWidgets from "./components/FloatingWidgets";
+
 export default function App() {
   const [lang, setLang] = React.useState<"BG" | "EN">("EN");
   const [isLoading, setIsLoading] = React.useState(true);
   const [cart, setCart] = React.useState<CartItem[]>([]);
   const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
+  const [activeCategoryFilter, setActiveCategoryFilter] = React.useState<"all" | "living" | "dining" | "bedroom" | "office">("all");
 
   // Load cart on mount
   React.useEffect(() => {
@@ -96,7 +106,7 @@ export default function App() {
             key="preloader"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.6 } }}
-            className="fixed inset-0 z-50 bg-[#FAF7F0] flex flex-col items-center justify-center p-6"
+            className="fixed inset-0 z-50 bg-[#0d0d0e] flex flex-col items-center justify-center p-6 shadow-inner"
             id="site-preloader"
           >
             <motion.div
@@ -105,26 +115,26 @@ export default function App() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex flex-col items-center gap-4 text-center"
             >
-              <LiloviLogo className="h-14 md:h-16 w-auto filter drop-shadow-sm mb-1" />
+              <LiloviLogo className="h-14 md:h-16 w-auto mb-1" />
               <div className="space-y-1">
-                <span className="block font-jura text-lg font-black tracking-[0.25em] text-[#E85B5B] uppercase">
-                  LILOVI
+                <span className="block font-serif text-2xl font-bold tracking-widest text-[#C5A880] uppercase">
+                  ATELIER LILOVI
                 </span>
-                <span className="block font-jura text-[10px] text-zinc-500 tracking-wider uppercase font-bold">
-                  Bespoke Wooden Elegance & Digital Showcase
+                <span className="block font-sans text-[10px] text-neutral-400 tracking-[0.25em] uppercase font-light">
+                  Bespoke European Woodcraft & Digital Showroom
                 </span>
               </div>
               
               {/* Spinning progress loader bubble */}
-              <div className="relative w-16 h-0.5 bg-neutral-200 overflow-hidden mt-6 rounded-full">
+              <div className="relative w-24 h-[1px] bg-white/10 overflow-hidden mt-6 rounded-full">
                 <motion.div
                   animate={{ left: ["-100%", "100%"] }}
                   transition={{
                     repeat: Infinity,
-                    duration: 1.2,
+                    duration: 1.4,
                     ease: "easeInOut",
                   }}
-                  className="absolute top-0 bottom-0 w-1/2 bg-[#E85B5B]"
+                  className="absolute top-0 bottom-0 w-1/2 bg-[#C5A880]"
                 />
               </div>
             </motion.div>
@@ -154,16 +164,50 @@ export default function App() {
           onCatalogue={() => handleScrollToSection("catalogue-section")}
         />
 
-        {/* Digital Interactive FlipBook */}
-        <CatalogueFlipBook
+        {/* Dynamic Category Showcase Grid */}
+        <CategoryShowcaseGrid
           lang={lang}
-          onProductClick={(p) => setSelectedProduct(p)}
+          onSelectCategory={setActiveCategoryFilter}
         />
+
+        {/* Brand Credibility Numerical Statistis */}
+        <StatisticsCounter lang={lang} />
+
+        {/* Digital Interactive FlipBook */}
+        <div id="catalogue-section" className="scroll-mt-24">
+          <CatalogueFlipBook
+            lang={lang}
+            onProductClick={(p) => setSelectedProduct(p)}
+          />
+        </div>
 
         {/* Curated Products Bento Grid */}
         <ProductGrid
           lang={lang}
           onProductClick={(p) => setSelectedProduct(p)}
+          activeFilter={activeCategoryFilter}
+          setActiveFilter={setActiveCategoryFilter}
+        />
+
+        {/* Manufacturing Handcraft Timeline */}
+        <ManufacturingTimeline lang={lang} />
+
+        {/* Magazine Editorial Highlight */}
+        <MagazineFeaturedCollection
+          lang={lang}
+          onTriggerQuote={handleOpenQuoteSection}
+        />
+
+        {/* Spatial Transformation Before/After slider */}
+        <ProjectBeforeAfterSlider lang={lang} />
+
+        {/* Designer client recommendations */}
+        <TestimonialsCarousel lang={lang} />
+
+        {/* Architecture sample request Call to Action */}
+        <LuxuryCTA
+          lang={lang}
+          onTriggerQuote={handleOpenQuoteSection}
         />
 
         {/* Commercial Integrated Quote Builder */}
@@ -191,6 +235,9 @@ export default function App() {
 
         {/* Compliant Localized Cookie consent banner */}
         <CookieConsent lang={lang} />
+
+        {/* Floating Scroll & Contact widgets */}
+        <FloatingWidgets lang={lang} />
 
       </div>
     </>
